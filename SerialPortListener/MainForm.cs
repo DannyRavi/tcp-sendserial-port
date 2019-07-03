@@ -20,7 +20,7 @@ namespace SerialPortListener
     {
         SerialPortManager _spManager;
         Socket SClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        string str = "a";
+        string str = "12";
         public MainForm()
         {
             InitializeComponent();
@@ -34,6 +34,23 @@ namespace SerialPortListener
         List<string> listSendByte = new List<string>();
         List<string> listStore = new List<string>();
 
+        public string Decimal(string str)
+        {
+            string dec = string.Empty;
+
+            for (int i = 0; i < str.Length; ++i)
+            {
+                string cDec = ((byte)str[i]).ToString();
+
+                if (cDec.Length < 3)
+                    cDec = cDec.PadLeft(3, '0');
+
+                dec += cDec;
+            }
+
+            return dec;
+        }
+
         public void getMsg()
         {
 
@@ -41,15 +58,21 @@ namespace SerialPortListener
             {
                 while (true)
                 {
-                    byte[] b = new byte[1024];
+                    byte[] b = new byte[256];
                     int R = SClient.Receive(b);
+               
                     if (R > 0)
                     {
 
                         //!   ListShowmsg.Items.Add(ascint);Decimal(Encoding.Default.GetString(b, 0, R)
-                        ListShowmsg.Items.Add(Encoding.Default.GetString(b, 0, R));
+                        //!!   ListShowmsg.Items.Add(Encoding.Default.GetString(b, 0, R));
                         //!! ListShowmsg.Items.Add(",");
+                        // ListShowmsg.Items.Add(Decimal(Encoding.Default.GetString(b, 0, R)));
+                      
                         listGetByte.Add(Encoding.ASCII.GetString(b, 0, R));
+                   //     dataTest.Text = Encoding.ASCII.GetString(b, 0, R).ToString();
+
+
                         // ListShowmsg.Items.Add("Server :" + Decimal(Encoding.ASCII.GetString(b, 0, R)));
 
                         //  SoundPlayer simpleSound = new SoundPlayer(strAudioFilePath);
@@ -102,7 +125,7 @@ namespace SerialPortListener
             str = Encoding.ASCII.GetString(e.Data);
             listStore.Add(str);
           //  tbData.AppendText(str);
-            // tbData.ScrollToCaret();
+          //  tbData.ScrollToCaret();
 
         }
 
@@ -162,7 +185,7 @@ namespace SerialPortListener
             System.IO.File.WriteAllLines("E:/danny/app/SavedStoreLists.txt", listStore);
 
         }
-
+       int count = 10;
         private void sendMsg()
         {
 
@@ -170,20 +193,30 @@ namespace SerialPortListener
 
             while (true)
             {
-
-                string Nstr = threeNumber(str);
-
+                //count++;
+                // string Nstr = threeNumber(str);
+                //  int.TryParse(str, out count);
+            //  string  stra = "a";
+            
                 byte[] barray = new byte[256];
+               // dataTest.Text ;
+                //  ListShowmsg.Items.Add(str);
 
-           //     label3.Text = Nstr;
-
-                barray = Encoding.ASCII.GetBytes(Nstr);
+                barray = Encoding.ASCII.GetBytes(str);
+                SClient.Send(barray);
+                listSendByte.Add(str);
+                
 
                 SClient.Send(barray);
+                listSendByte.Add(str);
+                //if (count == 99)
+                //{
+                //    count = 10;
+                //}
                 //listSendByte.Add(barray.ToString());
 
 
-                listSendByte.Add(Nstr);
+
 
                 //barray = Encoding.ASCII.GetBytes(newVal.ToString());
                 //SClient.Send(barray);
@@ -224,23 +257,47 @@ namespace SerialPortListener
             }
             else
             {
-                strs = "0";
+                strs = "000";
+                
             }
 
 
-            if (strInteger > 999)
+            if (strInteger > 255)
             {
-                strs = "999";
+                strs = "255";
+             
             }
-            if ((strInteger <= 99) & (strInteger >= 10))
+            else if ((strInteger <= 99) & (strInteger >= 10))
             {
                 strs = "0" + strs;
+               
             }
-            if (strInteger <= 9)
+            else if (strInteger <= 9)
             {
                 strs = "00" + strs;
+              
             }
             return strs;
+        }
+
+
+        private string divNumber(string strs)
+        {
+
+            int strInteger1 = 0;
+            int dr = 0;
+            if (Int32.TryParse(strs, out int numValue))
+            {
+                Int32.TryParse(strs, out strInteger1);
+                dr = strInteger1/2;
+            }
+            else
+            {
+                strs = "10";
+
+            }
+            string stri = dr.ToString();
+            return stri;
         }
 
     }

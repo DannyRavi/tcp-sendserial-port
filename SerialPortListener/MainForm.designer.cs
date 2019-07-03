@@ -188,7 +188,7 @@
             // btnStart
             // 
             this.btnStart.BackColor = System.Drawing.Color.MediumBlue;
-            this.btnStart.Location = new System.Drawing.Point(152, 215);
+            this.btnStart.Location = new System.Drawing.Point(12, 41);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(85, 23);
             this.btnStart.TabIndex = 12;
@@ -213,7 +213,7 @@
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.Color.MediumBlue;
-            this.btnStop.Location = new System.Drawing.Point(242, 215);
+            this.btnStop.Location = new System.Drawing.Point(12, 71);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(85, 23);
             this.btnStop.TabIndex = 12;
@@ -226,9 +226,9 @@
             this.dataTest.AutoSize = true;
             this.dataTest.Location = new System.Drawing.Point(523, 13);
             this.dataTest.Name = "dataTest";
-            this.dataTest.Size = new System.Drawing.Size(35, 13);
+            this.dataTest.Size = new System.Drawing.Size(55, 13);
             this.dataTest.TabIndex = 35;
-            this.dataTest.Text = "label3";
+            this.dataTest.Text = "DataSend";
             // 
             // btnWave
             // 
@@ -330,7 +330,7 @@
             this.txtIp.Name = "txtIp";
             this.txtIp.Size = new System.Drawing.Size(95, 20);
             this.txtIp.TabIndex = 25;
-            this.txtIp.Text = "192.168.1.64";
+            this.txtIp.Text = "192.168.1.51";
             // 
             // BtnSend
             // 
