@@ -205,6 +205,7 @@ namespace SerialPortListener
             }
         }
 
+
         private void BtnSend_Click(object sender, EventArgs e)
         {
             byte[] barray = new byte[1024];
