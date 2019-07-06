@@ -185,7 +185,7 @@ namespace SerialPortListener
             System.IO.File.WriteAllLines("E:/danny/app/SavedStoreLists.txt", listStore);
 
         }
-       int count = 10;
+        ushort count = 300;
         private void sendMsg()
         {
 
@@ -198,17 +198,32 @@ namespace SerialPortListener
                 //  int.TryParse(str, out count);
             //  string  stra = "a";
             
-                byte[] barray = new byte[256];
-               // dataTest.Text ;
+                byte[] barray = new byte[1];
+                // dataTest.Text ;
                 //  ListShowmsg.Items.Add(str);
 
-                barray = Encoding.ASCII.GetBytes(str);
-                SClient.Send(barray);
-                listSendByte.Add(str);
+                 count++;
                 
 
-                SClient.Send(barray);
+                if (count == 1024)
+                {
+                    count = 0;
+                }
                 listSendByte.Add(str);
+            //    char a = (char)count;
+                byte[] barray1 =  BitConverter.GetBytes(count);
+               // dataTest.Text = converted.ToString();
+              //  string me = converted.ToString();
+              //  listSendByte.Add(me);
+               // barray = Encoding.GetBytes(converted.ToString());
+                SClient.Send(barray1);
+                //!  barray = Encoding.ASCII.GetBytes(str);    SClient.Send(barray1, barray1.Length, SocketFlags.None);
+                //!  SClient.Send(barray);
+                //   listSendByte.Add(str);
+
+
+                //    SClient.Send(barray);
+                //      listSendByte.Add(str);
                 //if (count == 99)
                 //{
                 //    count = 10;
