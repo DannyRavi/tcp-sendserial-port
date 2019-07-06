@@ -21,6 +21,7 @@ namespace SerialPortListener
         SerialPortManager _spManager;
         Socket SClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         string str = "12";
+        byte[] barrayer;
         public MainForm()
         {
             InitializeComponent();
@@ -122,7 +123,8 @@ namespace SerialPortListener
                 tbData.Text = tbData.Text.Remove(0, tbData.TextLength - maxTextLength);
 
             // This application is connected to a GPS sending ASCCI characters, so data is converted to text
-            str = Encoding.ASCII.GetString(e.Data);
+         //   str = Encoding.ASCII.GetString(e.Data);
+            barrayer = e.Data;
             listStore.Add(str);
           //  tbData.AppendText(str);
           //  tbData.ScrollToCaret();
@@ -133,6 +135,7 @@ namespace SerialPortListener
         private void btnStart_Click(object sender, EventArgs e)
         {
             _spManager.StartListening();
+            MessageBox.Show("Connect serial");
         }
 
         // Handles the "Stop Listening"-buttom click event
@@ -185,7 +188,7 @@ namespace SerialPortListener
             System.IO.File.WriteAllLines("E:/danny/app/SavedStoreLists.txt", listStore);
 
         }
-        ushort count = 300;
+        ushort count = 0;
         private void sendMsg()
         {
 
@@ -193,42 +196,29 @@ namespace SerialPortListener
 
             while (true)
             {
-                //count++;
-                // string Nstr = threeNumber(str);
-                //  int.TryParse(str, out count);
-            //  string  stra = "a";
-            
-                byte[] barray = new byte[1];
-                // dataTest.Text ;
-                //  ListShowmsg.Items.Add(str);
 
-                 count++;
-                
 
-                if (count == 1024)
+                   byte[] barray = new byte[0];
+                count++;
+                if (count > 255)
                 {
                     count = 0;
                 }
-                listSendByte.Add(str);
-            //    char a = (char)count;
-                byte[] barray1 =  BitConverter.GetBytes(count);
-               // dataTest.Text = converted.ToString();
-              //  string me = converted.ToString();
-              //  listSendByte.Add(me);
-               // barray = Encoding.GetBytes(converted.ToString());
-                SClient.Send(barray1);
+
+                ///!!! byte[] barray1 =  BitConverter.GetBytes(count);
+                ///
+                barray = barrayer;
+                int inte = (int)barrayer[0];
+                 dataTest.Text = inte.ToString();
+                //  string me = converted.ToString();
+                //  listSendByte.Add(me);
+                // barray = Encoding.GetBytes(converted.ToString());
+                // SClient.Send(barrayer);
+                SClient.Send(barray);
                 //!  barray = Encoding.ASCII.GetBytes(str);    SClient.Send(barray1, barray1.Length, SocketFlags.None);
                 //!  SClient.Send(barray);
-                //   listSendByte.Add(str);
+                 //listSendByte.Add(barrayer);
 
-
-                //    SClient.Send(barray);
-                //      listSendByte.Add(str);
-                //if (count == 99)
-                //{
-                //    count = 10;
-                //}
-                //listSendByte.Add(barray.ToString());
 
 
 
@@ -237,14 +227,6 @@ namespace SerialPortListener
                 //SClient.Send(barray);
                 //listSendByte.Add(newVal.ToString());
 
-                //for (int i = 0; i < pcmHunter.Length; i++)
-                // {
-                // //    byte[] dataBytes = ConvertDoubleToByteArray(pcmmux[i]);
-                // barray = Encoding.ASCII.GetBytes();
-                //  SClient.Send(audioBytes);
-                //  listSendByte.Add(audioBytes.ToString());
-                //     listSendByte.Add(pcmHunter[i].ToString());
-                // }
 
                 // not imparance
 
