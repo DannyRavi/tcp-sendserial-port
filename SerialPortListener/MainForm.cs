@@ -209,7 +209,7 @@ namespace SerialPortListener
                 ///
                 barray = barrayer;
                 int inte = (int)barrayer[0];
-                dataTest.Text = inte.ToString();
+              //  dataTest.Text = inte.ToString();
                 //  string me = converted.ToString();
                 //  listSendByte.Add(me);
                 // barray = Encoding.GetBytes(converted.ToString());
