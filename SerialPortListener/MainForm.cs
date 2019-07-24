@@ -200,6 +200,7 @@ namespace SerialPortListener
 
                    byte[] barray = new byte[0];
                 count++;
+               
                 if (count > 255)
                 {
                     count = 0;
@@ -207,14 +208,16 @@ namespace SerialPortListener
 
                 ///!!! byte[] barray1 =  BitConverter.GetBytes(count);
                 ///
-                barray = barrayer;
-                int inte = (int)barrayer[0];
-              //  dataTest.Text = inte.ToString();
+      //////////////          barray = barrayer;///////////////////////
+
+                byte[] barray1 = BitConverter.GetBytes(count);
+                /////////////      int inte = (int)barrayer[0];///////////
+                //    dataTest.Text = inte.ToString();
                 //  string me = converted.ToString();
                 //  listSendByte.Add(me);
                 // barray = Encoding.GetBytes(converted.ToString());
                 // SClient.Send(barrayer);
-                SClient.Send(barray);
+                SClient.Send(barray1);///////////////
                 //!  barray = Encoding.ASCII.GetBytes(str);    SClient.Send(barray1, barray1.Length, SocketFlags.None);
                 //!  SClient.Send(barray);
                  //listSendByte.Add(barrayer);
