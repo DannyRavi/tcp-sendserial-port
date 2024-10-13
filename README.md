@@ -39,4 +39,3 @@ This C# application serves as a bridge between a serial port and a Wi-Fi network
 * **Performance:** Optimize the application for performance, especially when dealing with high data rates or large datasets.
 * **Error Handling:** Implement proper error handling to gracefully handle exceptions and provide informative feedback.
 
-**Feel free to modify and extend this README to include more specific details about your application's functionality and usage.**
